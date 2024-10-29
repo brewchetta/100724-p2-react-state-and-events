@@ -10,7 +10,7 @@ function App() {
   const [clicks, setClicks] = useState(0)
   const [candyBars, setCandyBars] = useState( ['100 Grand', 'Almond Joy', 'Snickers', 'Reese\'s Fast Break', 'Milky Way', 'Cookies and Cream Hershey\'s'] )
 
-  const mappedCandy = candyBars.map(bar => <CandyBar key={bar} candy={bar} />)
+  const mappedCandy = candyBars.map(bar => <CandyBar key={bar} candy={bar} /> )
 
   // clicks = "hamburger"
   // setClicks("hamburger")
@@ -20,13 +20,17 @@ function App() {
     console.log("clicks: ", clicks)
   }
 
-  function handleMakeClicksGood() {
-    setClicks("that was great")
-    setCandyBars( candyBars + 'Three Musketeers' )
+  function handleAddNewCandy() {
+    setCandyBars( [...candyBars, 'Reese\'s'] )
   }
   
   function handleReset() {
     setClicks(0)
+  }
+
+  function handleSortCandies() {
+    const sortedCandy = [...candyBars].sort((candyA, candyB) => candyA > candyB)
+    setCandyBars(sortedCandy)
   }
 
   return (
@@ -38,9 +42,11 @@ function App() {
 
       <button onClick={handleClick} >You have clicked me {clicks} times</button>
 
-      <button onClick={handleMakeClicksGood}>Make clicks pretty good</button>
+      <button onClick={handleAddNewCandy}>Add New Reese's</button>
 
       <button onClick={handleReset}>Reset clicks</button>
+
+      <button onClick={handleSortCandies}>Sort Candy Bars</button>
 
       { mappedCandy }
 
